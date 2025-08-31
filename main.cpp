@@ -15,5 +15,11 @@ int main() {
 
 	std::cout << "Day of week : " << static_cast<int>(d2.get_week_day()) << '\n';
 
+	std::cout << "d1 : " << d1 << '\n';
+
+	std::cin >> d1;
+
+	std::cout << "d1 : " << d1 << '\n';
+
 	return 0;
 }

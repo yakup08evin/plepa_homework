@@ -19,6 +19,19 @@ namespace project {
 		static constexpr int random_max_year = 2020;
 		enum class Weekday { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
 		static constexpr int DaysInMonth[13]{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+		static constexpr const char* MonthNames[13] = {
+			"", "January", "February", "March", "April", "May", "June",
+			"July", "August", "September", "October", "November", "December"
+		};
+		static constexpr const char* WeekdayNames[7] {
+			"Saturday",
+			"Sunday",
+			"Monday",
+			"Tuesday",
+			"Wednesday",
+			"Thursday",
+			"Friday"
+		};
 		Date();
 		Date(int d, int m, int y);
 		explicit Date(const char* p);
@@ -46,8 +59,8 @@ namespace project {
 		[[nodiscard]] static Date random_date();
 		static constexpr bool isleap(int y);
 
-		friend std::ostream& operator<<(std::ostream& os, const Date& date); //31
-		friend std::istream& operator>>(std::istream& is, Date& date); //32
+		friend std::ostream& operator<<(std::ostream& os, const Date& date); 
+		friend std::istream& operator>>(std::istream& is, Date& date); 
 	};
 
 	[[nodiscard]] bool operator<=(const Date&, const Date&);
@@ -58,10 +71,10 @@ namespace project {
 	[[nodiscard]] int operator-(const Date& lhs, const Date& rhs);
 	[[nodiscard]] Date operator+(const Date& date, int n);
 	[[nodiscard]] Date operator+(int n, const Date& date);
-	Date::Weekday& operator++(Date::Weekday& r); //30
-	Date::Weekday operator++(Date::Weekday& r, int); //30
-	Date::Weekday& operator--(Date::Weekday& r); //30
-	Date::Weekday operator--(Date::Weekday& r, int); //30}
+	Date::Weekday& operator++(Date::Weekday& r); 
+	Date::Weekday operator++(Date::Weekday& r, int); 
+	Date::Weekday& operator--(Date::Weekday& r); 
+	Date::Weekday operator--(Date::Weekday& r, int); 
 
 
 };

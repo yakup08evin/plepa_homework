@@ -275,6 +275,66 @@ namespace project {
 		return false;
 	}
 
+	std::ostream& operator<<(std::ostream& os, const Date& date) {
+
+		Date::Weekday wd = date.get_week_day();
+
+		os << date.m_day << ' ' << Date::MonthNames[date.m_month] << ' ' << date.m_year << ' ' << Date::WeekdayNames[static_cast<int>(wd)];
+		
+		return os;
+	}
+
+	std::istream& operator>>(std::istream& is, Date& date) {
+
+		char sep1, sep2;
+		Date temp{};
+		is >> temp.m_day >> sep1 >> temp.m_month >> sep2 >> temp.m_year;
+
+		if (sep1 == '/' &&
+			sep2 == '/' && 
+			temp.m_month >= 1 &&
+			temp.m_month <= 12 &&
+			temp.m_year >= Date::year_base &&
+			temp.m_day >= 1 &&
+			temp.m_day <= Date::DaysInMonth[temp.m_month] + (temp.m_month == 2 && Date::isleap(temp.m_year) ? 1 : 0)) {
+			
+			date.m_day = temp.m_day;
+			date.m_month = temp.m_month;
+			date.m_year = temp.m_year;
+		}
+		
+		return is;
+	}
+
+	Date::Weekday& operator++(Date::Weekday& r) {
+
+		r = static_cast<Date::Weekday>((static_cast<int>(r) + 1) % 7);
+
+		return r;
+	}
+
+	Date::Weekday operator++(Date::Weekday& r, int) {
+
+		Date::Weekday temp{ r };
+		++r;
+
+		return temp;
+	}
+
+	Date::Weekday& operator--(Date::Weekday& r) {
+
+		r = static_cast<Date::Weekday>((static_cast<int>(r) + 6) % 7);
+
+		return r;
+	}
+	
+	Date::Weekday operator--(Date::Weekday& r, int) {
+	
+		Date::Weekday temp{ r };
+		--r;
+		
+		return temp;
+	}
 }
 
 
